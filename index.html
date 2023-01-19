@@ -24,12 +24,13 @@
           <!-- make a form for add the x and y -->
           <form class="row row-cols-lg-auto g-3 align-items-center">
             <div class="col-12">
-              <input type="number" required class="form-control" id="xinput" placeholder="x" />
-              <input type="number" required class="form-control" id="yinput" placeholder="y" />
+              <input type="number" class="form-control" id="xinput" placeholder="x" />
+              <input type="number" class="form-control" id="yinput" placeholder="y" />
             </div>
             <div class="col-12">
-              <button type="submit" onclick="addData()" class="btn btn-primary">Tambah</button>
-              <button type="submit" onclick="removeData()" class="btn btn-danger">Hapus Sebelumnya</button>
+              <button type="button" onclick="addData()" class="btn btn-primary">Tambah</button>
+              <button type="button" onclick="removeData()" class="btn btn-danger">Hapus Sebelumnya</button>
+              <button type="button" onclick="clearData()" class="btn btn-danger fw-bold">Clear</button>
             </div>
           </form>
         </div>
@@ -41,7 +42,7 @@
           <form class="row row-cols-lg-auto g-3 align-items-center">
             <div class="col-12">
               <label for="outputForm" class="form-label">output:</label>
-              <textarea style="width: 85vw;" class="form-control" id="outputForm" rows="25"></textarea>
+              <textarea style="width: 85vw;" disabled class="form-control" id="outputForm" rows="25"></textarea>
             </div>
           </form>
         </div>

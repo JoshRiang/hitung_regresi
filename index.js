@@ -3,54 +3,57 @@ var y = [];
 
 function addData() {
   // take the data from the input
-  var xInput = document.getElementById("xinput").value;
-  var yInput = document.getElementById("yinput").value;
+  var xInput = +document.getElementById("xinput").value;
+  var yInput = +document.getElementById("yinput").value;
+  if (xInput.length == 0 || yInput.length == 0) return;
   // add the data to the array
   x.push(xInput);
   y.push(yInput);
   // clear the input
   document.getElementById("xinput").value = "";
   document.getElementById("yinput").value = "";
-  // add the data to the table id dataTable
-  if (xInput.length != 0 && yInput.length != 0) {
-    $("#dataTable").append(`
-    <tr>
-        <td>${xInput}</td>
-        <td>${yInput}</td>
-    </tr>
-  `);
-  }
   renderOutput(x, y);
   return;
 }
 
 function removeData() {
-    // remove the last data from the array
-    x.pop();
-    y.pop();
-    // remove the last data from the table
-    $("#dataTable tr:last").remove();
-    renderOutput(x, y);
-    return;
+  // remove the last data from the array
+  x.pop();
+  y.pop();
+  // remove the last data from the table
+  $("#dataTable tr:last").remove();
+  renderOutput(x, y);
+  return;
+}
+
+function clearData() {
+  // clear the array
+  x = [];
+  y = [];
+  // clear the table
+  $("#dataTable").empty();
+  // remove the outputform
+  $("#outputForm").empty();
+  renderOutput(x, y);
+  return;
 }
 
 function renderOutput(x, y) {
-  console.log(x);
-  console.log(y);
+  console.log("x:" + x);
+  console.log("y:" + y);
+
+  // add the data to the table id dataTable
+  $("#dataTable").empty();
+  for (var i = 0; i < x.length; i++) {
+    $("#dataTable").append("<tr><td>" + x[i] + "</td><td>" + y[i] + "</td></tr>");
+  }
 
   var avgX = 0;
   var avgY = 0;
 
-  for (var i = 0; i < x.length; i++) {
-    avgX += x[i];
-  }
+  avgX = x.reduce((a,b)=>+a + +b) / x.length;
 
-  for (var i = 0; i < y.length; i++) {
-    avgY += y[i];
-  }
-
-  avgX = avgX / x.length;
-  avgY = avgY / y.length;
+  avgY = y.reduce((a,b)=>+a + +b) / y.length;
 
   let sumXY = 0;
 
@@ -60,27 +63,17 @@ function renderOutput(x, y) {
     sumXY += (x[i] - avgX) * (y[i] - avgY);
   }
 
-  console.log("x bar : " + avgX);
-  console.log("y bar : " + avgY);
-
-  console.log("SSxy: " + sumXY);
-
   let sumXX = 0;
 
   for (var i = 0; i < x.length; i++) {
     // (x - avgX) * (y - avgY)
     sumXX += (x[i] - avgX) * (x[i] - avgX);
   }
-  console.log("SSxx: " + sumXX);
-
-  console.log("b: " + sumXY / sumXX);
 
   var a = 0;
 
   // a = avgY - b * avgX
   a = avgY - (sumXY / sumXX) * avgX;
-
-  console.log("a: " + a);
 
   $("#outputForm").text(`    x bar : ${avgX} 
     y bar : ${avgY} 
