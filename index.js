@@ -32,21 +32,21 @@ function clearData() {
   y = [];
   // clear the table
   $("#dataTable").empty();
-  // remove the outputform
   $("#outputForm").empty();
-  renderOutput(x, y);
   return;
 }
 
 function renderOutput(x, y) {
-  console.log("x:" + x);
-  console.log("y:" + y);
-
   // add the data to the table id dataTable
   $("#dataTable").empty();
   for (var i = 0; i < x.length; i++) {
     $("#dataTable").append("<tr><td>" + x[i] + "</td><td>" + y[i] + "</td></tr>");
   }
+
+  if (x.length == 0 || y.length == 0) {
+    $("#outputForm").empty().text("No data");
+    return;
+  };
 
   var avgX = 0;
   var avgY = 0;
