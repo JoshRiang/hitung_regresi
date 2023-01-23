@@ -70,16 +70,28 @@ function renderOutput(x, y) {
     sumXX += (x[i] - avgX) * (x[i] - avgX);
   }
 
+  let sumYY = 0
+  for (var i = 0; i < x.length; i++) {
+    // (x - avgX) * (y - avgY)
+    sumYY += (y[i] - avgY) * (y[i] - avgY);
+  }
+ 
   var a = 0;
 
   // a = avgY - b * avgX
-  a = avgY - (sumXY / sumXX) * avgX;
+  a = avgY - (sumXY / sumXX) * avgX
+
+  // hitung r
+  var r = 0 
+  r = (sumXY/Math.sqrt((sumXX * sumYY)))
 
   $("#outputForm").text(`    x bar : ${avgX} 
     y bar : ${avgY} 
     SSxy : ${sumXY} 
     SSxx : ${sumXX} 
+    SSYY : ${sumYY}
     b : ${sumXY / sumXX} 
     a : ${a} 
+    r : ${r}
   `);
 }
