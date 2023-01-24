@@ -89,7 +89,7 @@ function renderOutput(x, y) {
     y bar : ${avgY} 
     SSxy : ${sumXY} 
     SSxx : ${sumXX} 
-    SSYY : ${sumYY}
+    SSyy : ${sumYY}
     b : ${sumXY / sumXX} 
     a : ${a} 
     r : ${r}
